@@ -6,5 +6,11 @@ class User < ApplicationRecord
 
   validates :name, presence: true
 
+  has_many :room_users
+  has_many :users, through: :room_users
+
+  def rooms
+    Room.joins(:room_users).where(room_users: { user_id: id })
+  end
 
 end
