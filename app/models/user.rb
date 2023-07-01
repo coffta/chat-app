@@ -8,6 +8,7 @@ class User < ApplicationRecord
 
   has_many :room_users
   has_many :users, through: :room_users
+  has_many :messages
 
   def rooms
     Room.joins(:room_users).where(room_users: { user_id: id })
